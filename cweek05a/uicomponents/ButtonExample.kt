@@ -1,6 +1,5 @@
 package com.example.cweek05a.uicomponents
 
-import android.R.attr.onClick
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
