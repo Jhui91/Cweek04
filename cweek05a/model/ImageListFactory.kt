@@ -19,6 +19,16 @@ object ImageListFactory {
             image = ImageUri.ResImage(R.drawable.img3),
             buttonType = ButtonType.ICON,
             likes = 100
+        ),
+        ImageData(
+            image = ImageUri.ResImage(R.drawable.img1),
+            buttonType = ButtonType.ICON,
+            likes = 100
+        ),
+        ImageData(
+            image = ImageUri.ResImage(R.drawable.img2),
+            buttonType = ButtonType.BADGE,
+            likes = 100
         )
     )
 }
