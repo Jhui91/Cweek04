@@ -20,6 +20,10 @@ fun ColumnScope.DrawerContact() {
         modifier = Modifier.padding(16.dp),
         fontSize = 20.sp
     )
+    Image(
+        painter = painterResource(id = R.drawable.image),
+        contentDescription = null
+    )
     Text(
         text = "w14021@konkuk.ac.kr",
         modifier = Modifier.padding(16.dp),
