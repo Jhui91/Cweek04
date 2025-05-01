@@ -18,6 +18,10 @@ import com.example.week09.example02.navigation.NavGraph
 @Composable
 fun MainScreen2(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
+    
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = backStackEntry?.destination?.route
+    
     Scaffold(
         topBar = {
             TopAppBar(
@@ -28,11 +32,12 @@ fun MainScreen2(modifier: Modifier = Modifier) {
             BottomNavigationBar(navController)
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(Routes.AddContacts.route)
-            }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "")
-            }
+            if(currentRoute == Routes.Contacts.route)
+                FloatingActionButton(onClick = {
+                    navController.navigate(Routes.AddContacts.route)
+                }) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "")
+                }
         }
     ) { contentPadding ->
         Column(modifier = Modifier.padding(contentPadding)) {
