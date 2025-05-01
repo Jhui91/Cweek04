@@ -30,12 +30,12 @@ fun MainScreen2(modifier: Modifier = Modifier) {
         }
     }
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    
+    val coroutineScope = rememberCoroutineScope()
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet{
-                
+                DrawerContact()
             }
         }
     ) {
@@ -46,7 +46,9 @@ fun MainScreen2(modifier: Modifier = Modifier) {
                         title = { Text(text = currentRoute.route) },
                         navigationIcon = {
                             IconButton(onClick = {
-                                
+                                coroutineScope.launch {
+                                    if(drawerState.isOpen) drawerState.close() else drawerState.open()
+                                }
                             }){
                                 Icon(
                                     imageVector = Icons.Default.Menu,
