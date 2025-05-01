@@ -20,7 +20,15 @@ fun MainScreen2(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = backStackEntry?.destination?.route
+    val currentRoute by remember(backStackEntry) {
+        drivedStateOf {
+            backStackEntry?.destination?.route?.let{
+                Routes.getRoutes(it)
+            } ?: run{
+                Routes.Home
+            }
+        }
+    }
     
     Scaffold(
         topBar = {
@@ -29,10 +37,11 @@ fun MainScreen2(modifier: Modifier = Modifier) {
             )
         },
         bottomBar = {
-            BottomNavigationBar(navController)
+            if(currentRoutes.isRoot)
+                BottomNavigationBar(navController)
         },
         floatingActionButton = {
-            if(currentRoute == Routes.Contacts.route)
+            if(currentRoute == Routes.Contacts)
                 FloatingActionButton(onClick = {
                     navController.navigate(Routes.AddContacts.route)
                 }) {
