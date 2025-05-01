@@ -32,12 +32,33 @@ fun MainScreen2(modifier: Modifier = Modifier) {
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(text = "20000 홍길동") }
-            )
+            if(currentRoute.isRoot)
+                TopAppBar(
+                    title = { Text(text = currentRoute.route) },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            
+                        }){
+                            Icon(imageVector = Icons.Default.Menu,
+                                contentDescription = "")
+                        }
+                    }
+                )
+            else
+                TopAppBar(
+                    title = {  },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            navController.popBackStack()
+                        }){
+                            Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                contentDescription = "")
+                        }
+                    }
+                )
         },
         bottomBar = {
-            if(currentRoutes.isRoot)
+            if(currentRoute.isRoot)
                 BottomNavigationBar(navController)
         },
         floatingActionButton = {
