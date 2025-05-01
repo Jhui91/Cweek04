@@ -29,49 +29,63 @@ fun MainScreen2(modifier: Modifier = Modifier) {
             }
         }
     }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     
-    Scaffold(
-        topBar = {
-            if(currentRoute.isRoot)
-                TopAppBar(
-                    title = { Text(text = currentRoute.route) },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            
-                        }){
-                            Icon(imageVector = Icons.Default.Menu,
-                                contentDescription = "")
-                        }
-                    }
-                )
-            else
-                TopAppBar(
-                    title = {  },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            navController.popBackStack()
-                        }){
-                            Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                                contentDescription = "")
-                        }
-                    }
-                )
-        },
-        bottomBar = {
-            if(currentRoute.isRoot)
-                BottomNavigationBar(navController)
-        },
-        floatingActionButton = {
-            if(currentRoute == Routes.Contacts)
-                FloatingActionButton(onClick = {
-                    navController.navigate(Routes.AddContacts.route)
-                }) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "")
-                }
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet{
+                
+            }
         }
-    ) { contentPadding ->
-        Column(modifier = Modifier.padding(contentPadding)) {
-            NavGraph(navController = navController)
+    ) {
+        Scaffold(
+            topBar = {
+                if(currentRoute.isRoot)
+                    TopAppBar(
+                        title = { Text(text = currentRoute.route) },
+                        navigationIcon = {
+                            IconButton(onClick = {
+                                
+                            }){
+                                Icon(
+                                    imageVector = Icons.Default.Menu,
+                                    contentDescription = ""
+                                )
+                            }
+                        }
+                    )
+                else
+                    TopAppBar(
+                        title = { },
+                        navigationIcon = {
+                            IconButton(onClick = {
+                                navController.popBackStack()
+                            }){
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                    contentDescription = ""
+                                )
+                            }
+                        }
+                    )
+            },
+            bottomBar = {
+                if(currentRoute.isRoot)
+                    BottomNavigationBar(navController)
+            },
+            floatingActionButton = {
+                if(currentRoute == Routes.Contacts)
+                    FloatingActionButton(onClick = {
+                        navController.navigate(Routes.AddContacts.route)
+                    }) {
+                        Icon(imageVector = Icons.Default.Add, contentDescription = "")
+                    }
+            }
+        ) { contentPadding ->
+            Column(modifier = Modifier.padding(contentPadding)) {
+                NavGraph(navController = navController)
+            }
         }
     }
 }
