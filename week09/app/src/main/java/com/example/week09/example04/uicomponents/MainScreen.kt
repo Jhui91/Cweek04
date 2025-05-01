@@ -16,10 +16,7 @@ fun rememberViewModelStoreOwner(): ViewModelStoreOwner {
     return remember(context) { context as ViewModelStoreOwner }
 }
 
-val LocalNavGraphViewModelStoreOwner =
-    staticCompositionLocalOf<ViewModelStoreOwner> {
-        error("Undefined")
-    }
+val LocalNavGraphViewModelStoreOwner = staticCompositionLocalOf<ViewModelStoreOwner> { error("Undefined") }
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
