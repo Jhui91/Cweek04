@@ -15,12 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Contacts() {
+fun AddContacts() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         Icon(
-            imageVector = Icons.Default.Person,
+            imageVector = Icons.Default.Add,
             contentDescription = "contacts",
             tint = Color.Blue,
             modifier = Modifier
@@ -34,6 +34,6 @@ fun Contacts() {
 @Composable
 private fun ContactsPreview() {
     MaterialTheme {
-        Contacts()
+        AddContacts()
     }
 }
