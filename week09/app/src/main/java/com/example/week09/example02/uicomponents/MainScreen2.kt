@@ -26,6 +26,13 @@ fun MainScreen2(modifier: Modifier = Modifier) {
         },
         bottomBar = {
             BottomNavigationBar(navController)
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                navController.navigate(Routes.AddContacts.route)
+            }) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "")
+            }
         }
     ) { contentPadding ->
         Column(modifier = Modifier.padding(contentPadding)) {
