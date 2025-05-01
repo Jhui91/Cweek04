@@ -24,5 +24,8 @@ fun NavGraph(navController: NavHostController) {
         composable(Routes.Favorites.route){
             Favorites()
         }
+        composable(Routes.AddContacts.route){
+            AddContacts()
+        }
     }
 }
