@@ -1,4 +1,4 @@
-package com.example.week10.example01
+package com.example.week10.example02
 
 import android.content.Intent
 import android.net.Uri
@@ -16,8 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MainScreen01(modifier: Modifier = Modifier) {
+fun MainScreen02(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -28,7 +29,7 @@ fun MainScreen01(modifier: Modifier = Modifier) {
 //            val web = Uri.parse("https://www.naver.com")
 //            val webIntent = Intent(Intent.ACTION_VIEW, web)
             val webIntent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://www.naver.com")
+                data = "https://www.naver.com".toUri()
             }
             context.startActivity(webIntent)
 
@@ -37,7 +38,7 @@ fun MainScreen01(modifier: Modifier = Modifier) {
         }
 
         Button(onClick = {
-            val location = Uri.parse("geo:37.543684,127.077130?z=16")
+            val location = "geo:37.543684,127.077130?z=16".toUri()
             val mapIntent = Intent(Intent.ACTION_VIEW, location)
             context.startActivity(mapIntent)
         }, modifier = Modifier.width(200.dp)) {
@@ -45,7 +46,7 @@ fun MainScreen01(modifier: Modifier = Modifier) {
         }
 
         Button(onClick = {
-            val message = Uri.parse("sms:010-1234-1234")
+            val message = "sms:010-1234-1234".toUri
             val messageIntent = Intent(Intent.ACTION_SENDTO, message)
             messageIntent.putExtra("sms_body", "집에 가자....")
             context.startActivity(messageIntent)
@@ -54,7 +55,7 @@ fun MainScreen01(modifier: Modifier = Modifier) {
         }
 
         Button(onClick = {
-            val number = Uri.parse("tel:010-1234-1234")
+            val number = "tel:010-1234-1234".toUri()
             val callIntent = Intent(Intent.ACTION_DIAL, number)
             context.startActivity(callIntent)
         }, modifier = Modifier.width(200.dp)) {
@@ -62,7 +63,7 @@ fun MainScreen01(modifier: Modifier = Modifier) {
         }
 
 //        Button(onClick = {
-//            val number = Uri.parse("tel:010-1234-1234")
+//            val number = "tel:010-1234-1234".toUri()
 //            val callIntent = Intent(Intent.ACTION_CALL, number)
 //            context.startActivity(callIntent)
 //        }, modifier = Modifier.width(200.dp)) {
@@ -73,6 +74,6 @@ fun MainScreen01(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun MainScreen01Preview() {
-    MainScreen01()
+private fun MainScreen02Preview() {
+    MainScreen02()
 }
