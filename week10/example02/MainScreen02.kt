@@ -55,9 +55,9 @@ fun MainScreen02(modifier: Modifier = Modifier) {
         }
 
         Button(onClick = {
-            val number = "tel:010-1234-1234".toUri()
-            val callIntent = Intent(Intent.ACTION_DIAL, number)
-            context.startActivity(callIntent)
+            // val number = "tel:010-1234-1234".toUri()
+            // val callIntent = Intent(Intent.ACTION_DIAL, number)
+            // context.startActivity(callIntent)
         }, modifier = Modifier.width(200.dp)) {
             Text("전화걸기")
         }
