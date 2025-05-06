@@ -1,4 +1,4 @@
-package com.example.week10.example03
+package com.example.week10.example02
 
 import android.content.Intent
 import android.net.Uri
