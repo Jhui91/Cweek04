@@ -14,10 +14,61 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 
 @Composable
 fun MainScreen02(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val callPermissionState = rememberPermissionState(permission = Manifest.permission.CALL_PHONE)
+    var showCallDialog by remember{ mutableStateOf(false) }
+    var showSettingDialog by remember{ mutableStateOf(false) }
+    var permissionConfirm by remember{ mutableStateOf(false) }
+
+    fun requestCallPermission(){
+        when{
+            callPermissionState.status.isGranted ->{
+                makeCall(context)
+            }
+            callPermissionState.status.shouldShowRationale ->{
+                showCallDialog = true
+            }
+            else ->{
+                if(permissionConfirm)
+                    showSettingDialog =true
+                else{
+                    permissionConfirm =true
+                    callPermissionState.launchPermissionRequest()
+                }
+            }
+        }
+    }
+    
+    if (showCallDialog) {
+        RationaleCallDialog(
+            onDismiss = { showCallDialog = false },
+            onConfirm = {
+                showCallDialog = false
+                callPermissionState.launchPermissionRequest()
+            }
+        )
+    }
+    
+    if (showSettingDialog) {
+        SettingsCallDialog(
+            onDismiss = { showSettingDialog = false },
+            onGoToSettings = {
+                showSettingDialog = false
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = "package:${context.packageName}".toUri()
+                }
+                context.startActivity(intent)
+            }
+        )
+    }
     
     Column(
         modifier = modifier.fillMaxSize(),
@@ -55,9 +106,7 @@ fun MainScreen02(modifier: Modifier = Modifier) {
         }
 
         Button(onClick = {
-            // val number = "tel:010-1234-1234".toUri()
-            // val callIntent = Intent(Intent.ACTION_DIAL, number)
-            // context.startActivity(callIntent)
+            requestCallPermission()
         }, modifier = Modifier.width(200.dp)) {
             Text("전화걸기")
         }
