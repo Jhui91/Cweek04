@@ -23,52 +23,6 @@ import com.google.accompanist.permissions.shouldShowRationale
 @Composable
 fun MainScreen03(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val callPermissionState = rememberPermissionState(permission = Manifest.permission.CALL_PHONE)
-    var showCallDialog by remember{ mutableStateOf(false) }
-    var showSettingDialog by remember{ mutableStateOf(false) }
-    var permissionConfirm by remember{ mutableStateOf(false) }
-
-    fun requestCallPermission(){
-        when{
-            callPermissionState.status.isGranted ->{
-                makeCall(context)
-            }
-            callPermissionState.status.shouldShowRationale ->{
-                showCallDialog = true
-            }
-            else ->{
-                if(permissionConfirm)
-                    showSettingDialog =true
-                else{
-                    permissionConfirm =true
-                    callPermissionState.launchPermissionRequest()
-                }
-            }
-        }
-    }
-    
-    if (showCallDialog) {
-        RationaleCallDialog(
-            onDismiss = { showCallDialog = false },
-            onConfirm = {
-                showCallDialog = false
-                callPermissionState.launchPermissionRequest()
-            }
-        )
-    }
-    
-    if (showSettingDialog) {
-        SettingsCallDialog(
-            onDismiss = { showSettingDialog = false },
-            onGoToSettings = {
-                showSettingDialog = false
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                    data = "package:${context.packageName}".toUri()
-                }
-                context.startActivity(intent)
-            }
-        )
-    }
     
     Column(
         modifier = modifier.fillMaxSize(),
