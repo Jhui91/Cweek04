@@ -1,4 +1,4 @@
-package com.example.week10.example01
+package com.example.week10.example03
 
 import android.content.Intent
 import android.net.Uri
@@ -16,8 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MainScreen01(modifier: Modifier = Modifier) {
+fun MainScreen04(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,13 +54,18 @@ fun MainScreen01(modifier: Modifier = Modifier) {
             Text("문자보내기")
         }
 
-        Button(onClick = {
-            val number = Uri.parse("tel:010-1234-1234")
-            val callIntent = Intent(Intent.ACTION_DIAL, number)
-            context.startActivity(callIntent)
-        }, modifier = Modifier.width(200.dp)) {
-            Text("전화걸기")
-        }
+        PermissionButton2(
+          permission = Manifest.permission.CALL_PHONE,
+          label = "전화 걸기",
+          onGranted = { makeCall(context) }
+        )
+
+        PermissionButton2(
+          permission = Manifest.permission.CAMERA,
+          label = "카메라",
+          onGranted = { showCamera(context) }
+        )
+
 
 //        Button(onClick = {
 //            val number = Uri.parse("tel:010-1234-1234")
@@ -73,6 +79,6 @@ fun MainScreen01(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun MainScreen01Preview() {
-    MainScreen01()
+private fun MainScreen04Preview() {
+    MainScreen04()
 }
