@@ -1,5 +1,6 @@
 package com.example.week10.example03
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.week10.functions.makeCall
+import com.example.week10.functions.showCamera
+import com.example.week10.uicomponents.PermissionButton2
 
 @Composable
 fun MainScreen04(modifier: Modifier = Modifier) {
